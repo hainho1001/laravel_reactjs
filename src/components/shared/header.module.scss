@@ -1,0 +1,17 @@
+.header {
+    padding: 10px;
+    text-align: center;
+
+    a {
+        display: inline-block;
+        margin-right: 10px;
+        padding: 5px 10px;
+        color: #1a1a1a;
+        text-decoration: none;
+        background-color: transparent;
+        svg {
+            width: 18px;
+            margin-right: 5px;
+        }
+    }
+}

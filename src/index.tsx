@@ -1,15 +1,17 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import Routes from './routes';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { ProductsContextProvider } from './contexts/ProductsContext';
+import { CartContextProvider } from './contexts/CartContext';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root')
+  <ProductsContextProvider>
+    <CartContextProvider>
+      <Routes />
+    </CartContextProvider>
+  </ProductsContextProvider>
+  ,document.getElementById('root')
 );
 
 reportWebVitals();

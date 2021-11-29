@@ -16,7 +16,7 @@ export function User() {
     e.preventDefault();
     const db = firebase.firestore();
 
-    const userRef = db.collection("users").add({
+    db.collection("hai_shops").add({
       fullname: form.fullname,
       email: form.email
     });
