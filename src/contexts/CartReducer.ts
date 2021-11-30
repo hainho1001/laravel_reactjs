@@ -7,7 +7,9 @@ const Storage = (cartItems: any) => {
 
 export const sumItems = (cartItems: any) => {
     Storage(cartItems);
-    return {};
+    let itemCount = cartItems.reduce((total: any, product: any) => total + product.quantity, 0);
+    let total = cartItems.reduce((total: any, product: any) => total + product.price * product.quantity, 0).toFixed(2);
+    return { itemCount, total }
 }
 
 export const CartReducer = (state: any, action: any) => {
@@ -22,7 +24,8 @@ export const CartReducer = (state: any, action: any) => {
             return {
                 ...state,
                 ...sumItems(state.cartItems),
-                cartItems: [...state.cartItems]
+                cartItems: [...state.cartItems],
+                checkout: false,
             }
         case "INCREASE":
             state.cartItems[state.cartItems.findIndex((item: any) => item.name === action.payload.name)].quantity++
@@ -44,7 +47,18 @@ export const CartReducer = (state: any, action: any) => {
                 ...sumItems(state.cartItems.filter((item: any) => item.name !== action.payload.name)),
                 cartItems: [...state.cartItems.filter((item: any) => item.name !== action.payload.name)]
             }
+        case "CLEAR_ITEM":
+            return {
+                ...sumItems([]),
+                cartItems: [],
+            }
+        case "CHECKOUT":
+            return {
+                ...sumItems([]),
+                cartItems: [],
+                checkout: true,
+            }
         default:
-            break;
+            return state
     }
 }
