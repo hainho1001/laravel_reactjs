@@ -15,3 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('register', 'Api\AuthController@register');
+Route::post('login', 'Api\AuthController@login');
+Route::post('refresh-token', 'Api\AuthController@refreshToken');
+
+Route::middleware('auth:api')->namespace('Api')->group( function() {
+    Route::get('a', function() {
+        return auth()->user();
+    });
+});
