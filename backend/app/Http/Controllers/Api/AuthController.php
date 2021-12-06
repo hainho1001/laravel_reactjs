@@ -67,7 +67,6 @@ class AuthController extends Controller
 			return $this->sendSuccessResponse($passport);
 		} catch (\Exception $e) {
             return $this->sendErrorResponse($e->getMessage(), $this->statusInternalServerError);
-
 		}
 	}
 }
