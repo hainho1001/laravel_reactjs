@@ -1,6 +1,3 @@
-
-
-
 const Storage = (cartItems: any) => {
     localStorage.setItem('cart', JSON.stringify(cartItems.length > 0 ? cartItems: []));
 }

@@ -1,66 +1,110 @@
-import Layout from "../../components/Layout";
-import Repository from "../../service/api";
+import { useState } from "react";
+import { useUser } from "../../hooks/useUser";
+import Repository from "../../service/Repository";
 
 export function Login() {
+  const {login, user}: any = useUser();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    await Repository.post('/login', {email: "2@gmail.com", password: "12345678"})
+    await Repository.post("/login", {email: email, password: password})
       .then((response: any) => {
-        debugger;
-        console.log(response.data);
-
+        login(response.data.data);
       })
       .catch((error: any) => {
-        console.log("12323", error.response);
+        debugger
       });
   };
 
   return (
-    <Layout>
-      <div className="container">
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
+    <section className="vh-100" style={{ backgroundColor: "#9A616D" }}>
+      <div className="container py-5 h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col col-xl-10">
+            <div className="card" style={{ borderRadius: "1rem" }}>
+              <div className="row g-0">
+                <div className="col-md-6 col-lg-5 d-none d-md-block">
+                  <img
+                    src="assets/img/login.jpg"
+                    alt="login form"
+                    className="img-fluid"
+                    style={{ borderRadius: "1rem 0 0 1rem" }}
+                  />
+                </div>
+                <div className="col-md-6 col-lg-7 d-flex align-items-center">
+                  <div className="card-body p-4 p-lg-5 text-black">
+                    <form onSubmit={(e: any) => handleSubmit(e)}>
+                      <div className="d-flex align-items-center mb-3 pb-1">
+                        <i
+                          className="fas fa-cubes fa-2x me-3"
+                          style={{ color: "#ff6219" }}
+                        />
+                        <span className="h1 fw-bold mb-0 text-success">
+                          Hai
+                        </span>
+                      </div>
+                      <h5
+                        className="fw-normal mb-3 pb-3"
+                        style={{ letterSpacing: "1px" }}
+                      >
+                        Sign into your account
+                      </h5>
+                      <div className="form-outline mb-4">
+                        <input
+                          type="email"
+                          id="form2Example17"
+                          className="form-control form-control-lg"
+                          onChange={(e: any) => setEmail(e.target.value)}
+                        />
+                        <label className="form-label" htmlFor="form2Example17">
+                          Email address
+                        </label>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input
+                          type="password"
+                          id="form2Example27"
+                          className="form-control form-control-lg"
+                          onChange={(e: any) => setPassword(e.target.value)}
+                        />
+                        <label className="form-label" htmlFor="form2Example27">
+                          Password
+                        </label>
+                      </div>
+                      <div className="pt-1 mb-4">
+                        <button
+                          className="btn btn-success btn-lg btn-block"
+                          type="submit"
+                        >
+                          Login
+                        </button>
+                      </div>
+                      <a className="small text-muted" href="#!">
+                        Forgot password?
+                      </a>
+                      <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
+                        Don't have an account?{" "}
+                        <a href="#!" style={{ color: "#393f81" }}>
+                          Register here
+                        </a>
+                      </p>
+                      <a href="#!" className="small text-muted">
+                        Terms of use.
+                      </a>
+                      <a href="#!" className="small text-muted">
+                        Privacy policy
+                      </a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
-          </label>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
       </div>
-
-    </Layout>
+    </section>
   );
 }

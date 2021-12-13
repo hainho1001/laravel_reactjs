@@ -27,7 +27,7 @@ class AuthController extends Controller
         if (auth()->attempt($request->only('email', 'password'))) {
             $passport = $this->getTokenAndRefreshToken($request->email, $request->password);
 
-            return $this->sendSuccessResponse($passport);
+            return $this->sendSuccessResponse(["token" => $passport, "user" => $request->user()]);
         }
 
         return $this->sendFailedResponse('Unauthorized', $this->statusUnauthorized);

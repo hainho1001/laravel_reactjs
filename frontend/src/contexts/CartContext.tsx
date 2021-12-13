@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import { CartReducer, sumItems } from './CartReducer';
+import { CartReducer, sumItems } from '../reducers/CartReducer';
 
 export const CartContext = createContext(Object ());
 
@@ -33,7 +33,6 @@ export function CartContextProvider({children}: any) {
   }
 
   const handleCheckout = () => {
-    debugger
     dispatch({type: 'CHECKOUT'});
   }
 

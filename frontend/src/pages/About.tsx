@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Layout from "../components/Layout";
 import Repository from "../service/api";
 
@@ -12,8 +12,6 @@ export function About() {
 
     await Repository.post('/login', {email: "2@gmail.com", password: "12345678"})
       .then((response: any) => {
-        debugger;
-
         console.log(response.data);
         setData(response.data);
       })
